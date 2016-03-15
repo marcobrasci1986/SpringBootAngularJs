@@ -7,7 +7,8 @@
         var publicAPI = {
             getList: getList,
             createItem: createItem,
-            findById: findById
+            findById: findById,
+            deleteItem: deleteItem
         };
 
         function getList() {
@@ -20,6 +21,10 @@
 
         function findById() {
             return Restangular.one('items', 1).get();
+        }
+
+        function deleteItem(item){
+            return item.remove();
         }
 
 

@@ -7,11 +7,7 @@
 
 
         function setup() {
-            ItemService.getList().then(function (data) {
-                vm.items = data ? data : [];
-            }, function (error) {
-                console.log('Error: ' + error);
-            });
+            getList();
 
             ItemService.findById(1).then(function (data) {
                 console.log('Data: ' + data);
@@ -19,6 +15,15 @@
                 console.log('Error: ' + error);
             })
         }
+
+        function getList() {
+            ItemService.getList().then(function (data) {
+                vm.items = data ? data : [];
+            }, function (error) {
+                console.log('Error: ' + error);
+            });
+        }
+
 
 
         vm.addItem = function (description) {
@@ -29,7 +34,7 @@
 
             ItemService.createItem(newItem).then(function () {
                 console.log('Insert complete. Refreshing list');
-                vm.getList();
+                getList();
             }, function (error) {
                 console.log('Error: ' + error);
             });
@@ -40,30 +45,16 @@
         };
 
         vm.deleteItem = function (item) {
-            console.log('Update item');
+            ItemService.deleteItem(item).then(function () {
+                console.log('Delete complete. Refreshing list');
+                getList();
+
+                //$scope.items.splice($scope.items.indexOf(item), 1);
+            }, function (error) {
+                console.log('Error deleting');
+            })
         };
 
-
-
-        //$scope.addItem = function(description) {
-        //  new Item({
-        //    description: description,
-        //    checked: false
-        //  }).$save(function(item) {
-        //    $scope.items.push(item);
-        //  });
-        //  $scope.newItem = "";
-        //};
-
-        //$scope.updateItem = function(item) {
-        //  item.$update();
-        //};
-
-        //$scope.deleteItem = function(item) {
-        //  item.$remove(function() {
-        //    $scope.items.splice($scope.items.indexOf(item), 1);
-        //  });
-        //};
     };
 
     ItemController.$inject = ['ItemService'];
