@@ -1,26 +1,26 @@
-(function(angular) {
-  var ItemService = function(Restangular) {
+(function (angular) {
+    var ItemService = function (Restangular) {
 
-      var items = Restangular.all('items');
+        // set the main route
+        var items = Restangular.all('items');
 
-    var publicAPI = {
-        getList : getList,
-        createItem : createItem
+        var publicAPI = {
+            getList: getList,
+            createItem: createItem
+        };
+
+        function getList() {
+            return items.getList();
+        }
+
+        function createItem(item) {
+            return items.post(item);
+        }
+
+
+        return publicAPI;
     };
 
-    function getList (){
-        return items.getList();
-    }
-
-      function createItem(item){
-          items.post();
-      }
-
-
-
-    return publicAPI;
-  };
-
     ItemService.$inject = ['Restangular'];
-  angular.module("myApp.services").factory("ItemService", ItemService);
+    angular.module("myApp.services").factory("ItemService", ItemService);
 }(angular));
