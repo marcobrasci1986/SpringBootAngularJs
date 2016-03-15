@@ -1,30 +1,33 @@
 (function(angular) {
-  var AppController = function($scope, Item) {
-    Item.query(function(response) {
-      $scope.items = response ? response : [];
-    });
+  var AppController = function($scope, ItemService) {
     
-    $scope.addItem = function(description) {
-      new Item({
-        description: description,
-        checked: false
-      }).$save(function(item) {
-        $scope.items.push(item);
-      });
-      $scope.newItem = "";
-    };
+    ItemService.getList().then(function (data) {
+      $scope.items = data ? data : [];
+    }, function (error) {
+      console.log('Error: ' + error);
+    })
     
-    $scope.updateItem = function(item) {
-      item.$update();
-    };
+    //$scope.addItem = function(description) {
+    //  new Item({
+    //    description: description,
+    //    checked: false
+    //  }).$save(function(item) {
+    //    $scope.items.push(item);
+    //  });
+    //  $scope.newItem = "";
+    //};
     
-    $scope.deleteItem = function(item) {
-      item.$remove(function() {
-        $scope.items.splice($scope.items.indexOf(item), 1);
-      });
-    };
+    //$scope.updateItem = function(item) {
+    //  item.$update();
+    //};
+    
+    //$scope.deleteItem = function(item) {
+    //  item.$remove(function() {
+    //    $scope.items.splice($scope.items.indexOf(item), 1);
+    //  });
+    //};
   };
   
-  AppController.$inject = ['$scope', 'Item'];
+  AppController.$inject = ['$scope', 'ItemService'];
   angular.module("myApp.controllers").controller("AppController", AppController);
 }(angular));
