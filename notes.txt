@@ -1,0 +1,4 @@
+Tutorial:
+---------------
+https://github.com/g00glen00b/ng-spring-boot
+http://g00glen00b.be/prototyping-spring-boot-angularjs/
