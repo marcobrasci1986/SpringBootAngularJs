@@ -3,5 +3,13 @@
     angular.module("myApp.controllers", []);
     angular.module("myApp.services", []);
 
-    angular.module("myApp", ["myApp.controllers", "myApp.services", "restangular"]);
+    var app = angular.module("myApp", ["myApp.controllers", "myApp.services", "restangular"]);
+
+
+    /**
+     * Set the default route for all requests
+     */
+    app.config(function(RestangularProvider) {
+        RestangularProvider.setBaseUrl('/springBootAngular');
+    });
 }(angular));
