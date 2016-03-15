@@ -6,7 +6,8 @@
 
         var publicAPI = {
             getList: getList,
-            createItem: createItem
+            createItem: createItem,
+            findById: findById
         };
 
         function getList() {
@@ -15,6 +16,10 @@
 
         function createItem(item) {
             return items.post(item);
+        }
+
+        function findById() {
+            return Restangular.one('items', 1).get();
         }
 
 

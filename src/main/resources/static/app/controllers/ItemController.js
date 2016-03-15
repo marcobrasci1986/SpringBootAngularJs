@@ -12,6 +12,12 @@
             }, function (error) {
                 console.log('Error: ' + error);
             });
+
+            ItemService.findById(1).then(function (data) {
+                console.log('Data: ' + data);
+            }, function (error) {
+                console.log('Error: ' + error);
+            })
         }
 
 
@@ -36,6 +42,8 @@
         vm.deleteItem = function (item) {
             console.log('Update item');
         };
+
+
 
         //$scope.addItem = function(description) {
         //  new Item({
