@@ -1,8 +1,7 @@
 package be.ordina.controller;
 
 import be.ordina.domain.Item;
-import be.ordina.services.ItermService;
-import be.ordina.services.interfaces.GenericServiceInterface;
+import be.ordina.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ import java.util.List;
 public class ItemController {
 
     @Autowired
-    private ItermService itemService;
+    private ItemService itemService;
 
     @RequestMapping(method = RequestMethod.GET)
     public List findItems() {
