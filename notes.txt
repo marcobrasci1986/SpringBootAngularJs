@@ -2,9 +2,18 @@ Tutorial:
 ---------------
 https://github.com/g00glen00b/ng-spring-boot
 http://g00glen00b.be/prototyping-spring-boot-angularjs/
+https://github.com/dlbunker/ps-spring-boot-resources/
 
-
+-----------------------------------------
 Refresh static or restart after changing java code: build -> make project
 spring-boot-devtools: control + fn + F9
 
 LiveReload plugin in chrome: dot must be grey to enable livereload
+-----------------------------------------
+
+application-{profile}.properties
+example: application-dev.properties
+
+
+
+Spring profiles:-Dspring.profiles.active=test
