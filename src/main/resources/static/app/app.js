@@ -9,7 +9,7 @@
     /**
      * Set the default route for all requests
      */
-    app.config(function(RestangularProvider) {
-        RestangularProvider.setBaseUrl('/springBootAngular');
-    });
+    //app.config(function(RestangularProvider) {
+    //    RestangularProvider.setBaseUrl('/springBootAngular');
+    //});
 }(angular));
