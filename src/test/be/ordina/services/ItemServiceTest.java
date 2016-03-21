@@ -16,11 +16,14 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
- * Created by MaBa on 21/03/16.
+ * Integration test.
+ *
+ * Here you can inject services
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(Application.class)
 public class ItemServiceTest {
+
     @Autowired
     private ItemRepositoryInterface itemRepository;
 
@@ -36,18 +39,4 @@ public class ItemServiceTest {
         assertThat(result.size(), is(2));
     }
 
-    @Test
-    public void testFindOne() throws Exception {
-
-    }
-
-    @Test
-    public void testSaveAndFlush() throws Exception {
-
-    }
-
-    @Test
-    public void testDelete() throws Exception {
-
-    }
 }
