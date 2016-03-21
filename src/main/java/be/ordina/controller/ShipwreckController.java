@@ -13,6 +13,8 @@ import java.util.List;
 public class ShipwreckController {
 
 
+
+
     @RequestMapping(value = "shipwrecks", method = RequestMethod.GET)
     public List<Shipwreck> list() {
         return ShipwreckStub.list();
@@ -33,4 +35,8 @@ public class ShipwreckController {
         ShipwreckStub.delete(id);
     }
 
+    @RequestMapping(value = "shipwrecks/{id}", method = RequestMethod.GET)
+    public Shipwreck get(@PathVariable Long id) {
+        return ShipwreckStub.get(id);
+    }
 }
