@@ -5,6 +5,9 @@ import javax.persistence.*;
 /**
  * Created by MaBa on 22/03/16.
  */
+@NamedQueries(
+        @NamedQuery(name = "Person.findAgeGreaterThan", query = "select p from Person p where p.age > :age")
+)
 @Entity
 public class Person {
     @Id

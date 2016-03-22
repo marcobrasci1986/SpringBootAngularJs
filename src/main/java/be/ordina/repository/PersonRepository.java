@@ -14,6 +14,9 @@ import java.util.List;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer>{
 
-    @Query("Select p from Person p where p.age = :age")
-    List<Person> findByFirstLastAndAge(@Param("age") Integer age);
+    @Query("Select p from Person p where p.firstName = :firstName and p.lastName = :lastName and p.age = :age")
+    List<Person> findByFirstLastAndAge(@Param("firstName") String firstName,@Param("lastName") String lastName, @Param("age") Integer age);
+
+    List<Person> findAgeGreaterThan(@Param("age") Integer age);
+
 }

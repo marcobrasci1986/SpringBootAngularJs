@@ -17,7 +17,9 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+
 
 /**
  * Created by MaBa on 22/03/16.
@@ -42,7 +44,19 @@ public class PersonRepositoryTest {
     @Test
     @DatabaseSetup("/META-INF/dbtest/person/persons.xml")
     public void testFindByFirstLastAndAge() throws Exception {
-        List<Person> result = personRepository.findByFirstLastAndAge(33);
+        List<Person> result = personRepository.findByFirstLastAndAge("John", "Doe", 33);
+
+        assertEquals(1, result.size());
+        assertThat(result.get(0).getFirstName()).isEqualTo("John");
+        assertThat(result.get(0).getLastName()).isEqualTo("Doe");
+        assertThat(result.get(0).getAge()).isEqualTo(33);
+
+    }
+
+    @Test
+    @DatabaseSetup("/META-INF/dbtest/person/persons.xml")
+    public void testNamedQuery() throws Exception {
+        List<Person> result = personRepository.findAgeGreaterThan(20);
 
         assertEquals(1, result.size());
 
