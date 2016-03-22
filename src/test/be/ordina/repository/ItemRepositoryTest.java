@@ -6,12 +6,10 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
@@ -34,15 +32,15 @@ import static org.junit.Assert.*;
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class})
-public class ItemRepositoryInterfaceTest {
+public class ItemRepositoryTest {
 
     @Autowired
-    private ItemRepositoryInterface itemRepositoryInterface;
+    private ItemRepository itemRepository;
 
     @Test
     @DatabaseSetup("/META-INF/dbtest/findOne.xml")
     public void testFind() throws Exception {
-        Item result = itemRepositoryInterface.findOne(1);
+        Item result = itemRepository.findOne(1);
 
         assertNotNull(result);
         assertThat(result.getId()).isEqualTo(1);
@@ -53,13 +51,13 @@ public class ItemRepositoryInterfaceTest {
     @DatabaseSetup("/META-INF/dbtest/findOne.xml")
     @ExpectedDatabase(value = "/META-INF/dbtest/insert.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void testSave() throws Exception {
-        itemRepositoryInterface.saveAndFlush(new Item(true, "Second item"));
+        itemRepository.saveAndFlush(new Item(true, "Second item"));
     }
 
     @Test
     @DatabaseSetup("/META-INF/dbtest/findOne.xml")
     public void testFindByDescriptionStartingWith() throws Exception {
-        List<Item> result = itemRepositoryInterface.findByDescriptionIgnoreCaseStartingWith("My");
+        List<Item> result = itemRepository.findByDescriptionIgnoreCaseStartingWith("My");
         Item item = result.get(0);
 
         assertThat(item.getId()).isEqualTo(1);

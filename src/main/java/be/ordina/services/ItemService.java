@@ -1,7 +1,7 @@
 package be.ordina.services;
 
 import be.ordina.domain.Item;
-import be.ordina.repository.ItemRepositoryInterface;
+import be.ordina.repository.ItemRepository;
 
 import be.ordina.services.interfaces.ItemServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ItemService implements ItemServiceInterface {
 
     @Autowired
-    private ItemRepositoryInterface itemRepository;
+    private ItemRepository itemRepository;
 
 
     @Override

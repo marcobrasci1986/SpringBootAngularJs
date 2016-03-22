@@ -10,7 +10,7 @@ import java.util.List;
  * Created by MaBa on 15/03/2016.
  */
 @Repository
-public interface ItemRepositoryInterface extends JpaRepository<Item, Integer>{
+public interface ItemRepository extends JpaRepository<Item, Integer>{
 
     List<Item> findByDescriptionIgnoreCaseStartingWith(String value);
 }

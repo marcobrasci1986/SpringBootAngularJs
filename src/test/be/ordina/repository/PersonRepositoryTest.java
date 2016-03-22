@@ -1,8 +1,7 @@
-package be.ordina.services;
+package be.ordina.repository;
 
 import be.ordina.Application;
-import be.ordina.domain.Item;
-import be.ordina.repository.ItemRepository;
+import be.ordina.domain.Person;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Before;
@@ -18,26 +17,22 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Integration test.
- * <p>
- * Here you can inject services
+ * Created by MaBa on 22/03/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@SpringApplicationConfiguration(classes = Application.class)
 @TestExecutionListeners({
         DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class})
-@DatabaseSetup("/META-INF/dbtest/initialData.xml")
-public class ItemServiceTest {
+public class PersonRepositoryTest {
 
     @Autowired
-    private ItemRepository itemRepository;
+    private PersonRepository personRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -45,10 +40,11 @@ public class ItemServiceTest {
     }
 
     @Test
-    public void testFindAll() throws Exception {
-        List<Item> result = itemRepository.findAll();
+    @DatabaseSetup("/META-INF/dbtest/person/persons.xml")
+    public void testFindByFirstLastAndAge() throws Exception {
+        List<Person> result = personRepository.findByFirstLastAndAge(33);
 
-        assertThat(result.size(), is(2));
+        assertEquals(1, result.size());
+
     }
-
 }
