@@ -2,7 +2,7 @@ package be.ordina.services;
 
 import be.ordina.Application;
 import be.ordina.domain.Item;
-import be.ordina.repository.interfaces.ItemRepositoryInterface;
+import be.ordina.repository.ItemRepositoryInterface;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

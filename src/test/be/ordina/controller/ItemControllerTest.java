@@ -1,9 +1,7 @@
 package be.ordina.controller;
 
 import be.ordina.domain.Item;
-import be.ordina.repository.interfaces.ItemRepositoryInterface;
 import be.ordina.services.ItemService;
-import be.ordina.services.interfaces.ItemServiceInterface;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

@@ -1,7 +1,7 @@
 package be.ordina.services;
 
 import be.ordina.domain.Item;
-import be.ordina.repository.interfaces.ItemRepositoryInterface;
+import be.ordina.repository.ItemRepositoryInterface;
 
 import be.ordina.services.interfaces.ItemServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
