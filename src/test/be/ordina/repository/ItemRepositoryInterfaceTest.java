@@ -17,6 +17,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 import static org.junit.Assert.*;
@@ -48,8 +51,18 @@ public class ItemRepositoryInterfaceTest {
 
     @Test
     @DatabaseSetup("/META-INF/dbtest/findOne.xml")
-    @ExpectedDatabase(value = "/META-INF/dbtest/insert.xml")
+    @ExpectedDatabase(value = "/META-INF/dbtest/insert.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
     public void testSave() throws Exception {
         itemRepositoryInterface.saveAndFlush(new Item(true, "Second item"));
+    }
+
+    @Test
+    @DatabaseSetup("/META-INF/dbtest/findOne.xml")
+    public void testFindByDescriptionStartingWith() throws Exception {
+        List<Item> result = itemRepositoryInterface.findByDescriptionIgnoreCaseStartingWith("My");
+        Item item = result.get(0);
+
+        assertThat(item.getId()).isEqualTo(1);
+
     }
 }
