@@ -1,7 +1,10 @@
 (function (angular) {
-    var LoginController = function ($http, $location, $rootScope, SecurityService) {
+    var LoginController = function ($http, $location, SecurityService) {
 
         var vmLogin = this;
+
+        vmLogin.SecurityService = SecurityService;
+
 
         var authenticate = function(credentials, callback) {
             var headers = credentials ? {
@@ -14,17 +17,18 @@
                 headers : headers
             }).success(function(data) {
                 if (data.name) {
-                    $rootScope.authenticated = true;
+                    SecurityService.authenticated = true;
                 } else {
-                    $rootScope.authenticated = false;
+                    SecurityService.authenticated = false;
                 }
-                callback && callback($rootScope.authenticated);
+                callback && callback(SecurityService.authenticated);
             }).error(function(error) {
                 if(error.status == 401){
                     vmLogin.error = "You are not authorized 401";
                 }else{
                     vmLogin.error = "Something went wrong";
                 }
+                SecurityService.authenticated = false;
                 callback && callback(false);
             });
 
@@ -49,7 +53,7 @@
 
         vmLogin.logout = function () {
             $http.post('logout', {}).finally(function () {
-                $rootScope.authenticated = false;
+                SecurityService.authenticated = false;
                 $location.path("/");
             });
         };
@@ -57,6 +61,6 @@
 
     };
 
-    LoginController.$inject = ['$http', '$location', '$rootScope', 'SecurityService'];
+    LoginController.$inject = ['$http', '$location', 'SecurityService'];
     angular.module("myApp.controllers").controller("LoginController", LoginController);
 }(angular));

@@ -2,6 +2,7 @@
     var HomeController = function ($http, SecurityService) {
 
         var vm = this;
+        vm.SecurityService = SecurityService;
 
         $http.get('/resource/').success(function (data) {
             vm.greeting = data;

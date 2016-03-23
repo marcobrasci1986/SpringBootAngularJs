@@ -1,11 +1,11 @@
 <h1>Greeting</h1>
-<div ng-show="authenticated">
+<div ng-show="vm.SecurityService.authenticated">
     <p>The ID is {{vm.greeting.id}}</p>
     <p>The content is {{vm.greeting.content}}</p>
 </div>
-<div  ng-show="!authenticated">
+<div  ng-show="!vm.SecurityService.authenticated">
     <p>Login to see your greeting</p>
 </div>
 
 
-<pre>Authenticated: {{ authenticated }}</pre>
+<pre>Authenticated: {{ vm.SecurityService.authenticated }}</pre>

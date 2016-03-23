@@ -16,8 +16,8 @@
     <ul class="nav nav-pills" role="tablist">
         <li class="active"><a href="#/">home</a></li>
         <li><a href="#/login">login</a></li>
-        <li ng-show="authenticated"><a href="" ng-click="vmLogin.logout()">logout</a></li>
-        <li> {{authenticated }}</li>
+        <li ng-show="vmLogin.SecurityService.authenticated"><a href="" ng-click="vmLogin.logout()">logout</a></li>
+        <li> {{vmLogin.SecurityService.authenticated }}</li>
     </ul>
 </div>
 
