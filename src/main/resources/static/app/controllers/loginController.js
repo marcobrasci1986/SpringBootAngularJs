@@ -1,8 +1,7 @@
 (function (angular) {
-    var LoginController = function ($http, $rootScope, $location) {
+    var LoginController = function ($http, $location, $rootScope, SecurityService) {
 
-        var vm = this;
-
+        var vmLogin = this;
 
         var authenticate = function(credentials, callback) {
             var headers = credentials ? {
@@ -22,43 +21,42 @@
                 callback && callback($rootScope.authenticated);
             }).error(function(error) {
                 if(error.status == 401){
-                    vm.error = "You are not authorized 401";
+                    vmLogin.error = "You are not authorized 401";
                 }else{
-                    vm.error = "Something went wrong";
+                    vmLogin.error = "Something went wrong";
                 }
-                $rootScope.authenticated = false;
                 callback && callback(false);
             });
 
         };
 
         authenticate();
-        vm.credentials = {};
+        vmLogin.credentials = {};
 
-        vm.login = function () {
-            authenticate(vm.credentials, function (authenticated) {
+        vmLogin.login = function () {
+            authenticate(vmLogin.credentials, function (authenticated) {
                 if (authenticated) {
                     console.log("Login succeeded");
                     $location.path("/");
-                    $rootScope.authenticated = true;
+
                 } else {
                     $location.path("/login");
                     console.log("Login failed");
-                    $rootScope.authenticated = false;
                 }
             });
         };
 
 
-        vm.logout = function () {
+        vmLogin.logout = function () {
             $http.post('logout', {}).finally(function () {
                 $rootScope.authenticated = false;
                 $location.path("/");
             });
         };
 
+
     };
 
-    LoginController.$inject = ['$http', '$rootScope', '$location'];
+    LoginController.$inject = ['$http', '$location', '$rootScope', 'SecurityService'];
     angular.module("myApp.controllers").controller("LoginController", LoginController);
 }(angular));

@@ -12,11 +12,12 @@
 
 <body ng-app="myApp" ng-cloak class="ng-cloak">
 
-<div ng-controller="LoginController as vm" class="container">
+<div ng-controller="LoginController as vmLogin" class="container">
     <ul class="nav nav-pills" role="tablist">
         <li class="active"><a href="#/">home</a></li>
         <li><a href="#/login">login</a></li>
-        <li ng-show="authenticated"><a href="" ng-click="vm.logout()">logout</a></li>
+        <li ng-show="authenticated"><a href="" ng-click="vmLogin.logout()">logout</a></li>
+        <li> {{authenticated }}</li>
     </ul>
 </div>
 
@@ -29,6 +30,7 @@
 <script type="text/javascript" src="./app/app.js"></script>
 <script type="text/javascript" src="./app/controllers/ItemController.js"></script>
 <script type="text/javascript" src="./app/services/ItemService.js"></script>
+<script type="text/javascript" src="./app/services/SecurityService.js"></script>
 <script type="text/javascript" src="app/controllers/homeController.js"></script>
 <script type="text/javascript" src="app/controllers/loginController.js"></script>
 </body>
