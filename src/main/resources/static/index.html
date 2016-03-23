@@ -11,13 +11,15 @@
 </head>
 
 <body ng-app="myApp" ng-cloak class="ng-cloak">
-<div ng-controller="NavigationController as nav" class="container">
+
+<div ng-controller="LoginController as nav" class="container">
     <ul class="nav nav-pills" role="tablist">
         <li class="active"><a href="#/">home</a></li>
         <li><a href="#/login">login</a></li>
         <li ng-show="authenticated"><a href="" ng-click="nav.logout()">logout</a></li>
     </ul>
 </div>
+
 <div ng-view class="container"></div>
 
 <script type="text/javascript" src="./bower_components/angular/angular.js"></script>
@@ -28,6 +30,6 @@
 <script type="text/javascript" src="./app/controllers/ItemController.js"></script>
 <script type="text/javascript" src="./app/services/ItemService.js"></script>
 <script type="text/javascript" src="app/controllers/homeController.js"></script>
-<script type="text/javascript" src="app/controllers/navigationController.js"></script>
+<script type="text/javascript" src="app/controllers/loginController.js"></script>
 </body>
 </html>

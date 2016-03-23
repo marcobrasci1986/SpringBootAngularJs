@@ -1,7 +1,7 @@
 (function (angular) {
     var HomeController = function () {
 
-        var vm = this;
+        var controller = this;
 
         setup();
 

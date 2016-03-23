@@ -13,7 +13,7 @@
             controllerAs: 'controller'
         }).when('/login', {
             templateUrl: './app/views/login.html',
-            controller: 'NavigationController',
+            controller: 'LoginController',
             controllerAs: 'controller'
         }).otherwise('/');
 
