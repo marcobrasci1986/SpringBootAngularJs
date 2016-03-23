@@ -10,11 +10,11 @@
         $routeProvider.when('/', {
             templateUrl: './app/views/home.html',
             controller: 'HomeController',
-            controllerAs: 'controller'
+            controllerAs: 'vm'
         }).when('/login', {
             templateUrl: './app/views/login.html',
             controller: 'LoginController',
-            controllerAs: 'controller'
+            controllerAs: 'vm'
         }).otherwise('/');
 
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';

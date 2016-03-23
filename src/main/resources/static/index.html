@@ -12,11 +12,11 @@
 
 <body ng-app="myApp" ng-cloak class="ng-cloak">
 
-<div ng-controller="LoginController as nav" class="container">
+<div ng-controller="LoginController as vm" class="container">
     <ul class="nav nav-pills" role="tablist">
         <li class="active"><a href="#/">home</a></li>
         <li><a href="#/login">login</a></li>
-        <li ng-show="authenticated"><a href="" ng-click="nav.logout()">logout</a></li>
+        <li ng-show="authenticated"><a href="" ng-click="vm.logout()">logout</a></li>
     </ul>
 </div>
 
