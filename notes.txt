@@ -17,3 +17,11 @@ example: application-dev.properties
 
 
 Spring profiles:-Dspring.profiles.active=test
+
+
+----------------------------------------------
+
+Spring-Data-Rest
+http://localhost:8080/api -> list of all endpoints
+
+Scane for JPARepositories -> creates hidden @RestControllers

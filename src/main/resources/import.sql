@@ -2,18 +2,23 @@ INSERT INTO ITEM(id,checked,description) VALUES (1, false, 'My default descripti
 INSERT INTO ITEM(id,checked,description) VALUES (2, true, 'Another description');
 
 
+INSERT INTO Department(id,department_name, city) VALUES (1, 'IT', 'New york');
+INSERT INTO Department(id,department_name, city) VALUES (2, 'HelpDesk', 'Boston');
+INSERT INTO Department(id,department_name, city) VALUES (3, 'HR', 'Washington');
+INSERT INTO Department(id,department_name, city) VALUES (4, 'Cleaning', 'Miami');
 
 
-INSERT INTO Person(id,firstName,lastName, age) VALUES (1, 'John', 'Doe', 33);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (2, 'Mark', 'Johnston', 17);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (3, 'Eden', 'Hazard', 56);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (4, 'Jordan', 'Lukaku', 89);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (5, 'Tony', 'Alder', 33);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (6, 'Thibaud', 'Courtois', 4);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (7, 'Ben', 'Doe', 5);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (8, 'Josh', 'Long', 15);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (9, 'Sarah', 'Smith', 24);
-INSERT INTO Person(id,firstName,lastName, age) VALUES (10, 'Milly', 'Bond', 21);
+
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (1, 'John', 'Doe', 33, 1);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (2, 'Mark', 'Johnston', 17, 1);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (3, 'Eden', 'Hazard', 56, 1);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (4, 'Jordan', 'Lukaku', 89, 1);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (5, 'Tony', 'Alder', 33, 2);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (6, 'Thibaud', 'Courtois', 4, 2);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (7, 'Ben', 'Doe', 5, 2);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (8, 'Josh', 'Long', 15, 2);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (9, 'Sarah', 'Smith', 24, 3);
+INSERT INTO Person(id,first_name,last_name, age, department_id) VALUES (10, 'Milly', 'Bond', 21, 4);
 
 
 

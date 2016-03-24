@@ -9,10 +9,8 @@ import javax.persistence.*;
         @NamedQuery(name = "Person.findAgeGreaterThan", query = "select p from Person p where p.age > :age")
 )
 @Entity
-public class Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Person extends AbstractEntity{
+
 
     @Column
     private String firstName;
@@ -23,13 +21,12 @@ public class Person {
     @Column
     private int age;
 
-    public Integer getId() {
-        return id;
-    }
+    /**
+     * JoinColumn is on Employee
+     */
+    @ManyToOne
+    private Department department;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -53,5 +50,13 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

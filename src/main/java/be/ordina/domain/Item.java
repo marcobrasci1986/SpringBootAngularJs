@@ -7,10 +7,8 @@ import javax.persistence.*;
  */
 
 @Entity
-public class Item {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Item extends AbstractEntity{
+
     @Column
     private boolean checked;
     @Column
@@ -24,13 +22,6 @@ public class Item {
         this.description = description;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public boolean isChecked() {
         return checked;

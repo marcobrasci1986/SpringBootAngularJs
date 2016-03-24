@@ -62,37 +62,37 @@ public class Application {
      * The server create a cookie: XSRF-TOKEN
      * Angular will then append a X-XSRF-TOKEN in every header request
      */
-    @Configuration
-    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-    protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.httpBasic().and()
-                    .authorizeRequests()
-                    .antMatchers(
-                            "/app/views/**/*.html",
-                            "/app/**/*.js",
-                            "/bower_components/**",
-                            "/css/**", "/index.html",
-                            "/home.html",
-                            "/login.html",
-                            "/").permitAll().anyRequest()
-                    .authenticated().and()
-                    .csrf().csrfTokenRepository(csrfTokenRepository())
-                    .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
-        }
-
-
-        /**
-         * Angular will send a header with: X-XSRF-TOKEN.
-         *
-         * Here we configure what spring is expecting in every request
-         * @return
-         */
-        private CsrfTokenRepository csrfTokenRepository() {
-            HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-            repository.setHeaderName("X-XSRF-TOKEN");
-            return repository;
-        }
-    }
+//    @Configuration
+//    @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+//    protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+//        @Override
+//        protected void configure(HttpSecurity http) throws Exception {
+//            http.httpBasic().and()
+//                    .authorizeRequests()
+//                    .antMatchers(
+//                            "/app/views/**/*.html",
+//                            "/app/**/*.js",
+//                            "/bower_components/**",
+//                            "/css/**", "/index.html",
+//                            "/home.html",
+//                            "/login.html",
+//                            "/").permitAll().anyRequest()
+//                    .authenticated().and()
+//                    .csrf().csrfTokenRepository(csrfTokenRepository())
+//                    .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+//        }
+//
+//
+//        /**
+//         * Angular will send a header with: X-XSRF-TOKEN.
+//         *
+//         * Here we configure what spring is expecting in every request
+//         * @return
+//         */
+//        private CsrfTokenRepository csrfTokenRepository() {
+//            HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+//            repository.setHeaderName("X-XSRF-TOKEN");
+//            return repository;
+//        }
+//    }
 }
