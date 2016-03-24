@@ -58,6 +58,9 @@ public class Application {
 
     /**
      * Let css, js and views/*.html passthrough in Spring Security
+     *
+     * The server create a cookie: XSRF-TOKEN
+     * Angular will then append a X-XSRF-TOKEN in every header request
      */
     @Configuration
     @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
@@ -80,6 +83,12 @@ public class Application {
         }
 
 
+        /**
+         * Angular will send a header with: X-XSRF-TOKEN.
+         *
+         * Here we configure what spring is expecting in every request
+         * @return
+         */
         private CsrfTokenRepository csrfTokenRepository() {
             HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
             repository.setHeaderName("X-XSRF-TOKEN");
