@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by MaBa on 25/03/16.
@@ -36,6 +37,7 @@ public class CustomUserDetailService implements UserDetailsService {
         // find user
         UserInfo userInfo = usersRepository.findOne(username);
 
+        // find roles
         List<Role> roles = roleRepository.findByUsername(userInfo.getUsername());
 
         List<GrantedAuthority> authorities = new ArrayList<>();

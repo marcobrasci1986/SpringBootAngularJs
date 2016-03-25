@@ -1,5 +1,5 @@
 (function (angular) {
-    var HomeController = function ($http, SecurityService) {
+    var HomeController = function ($http, SecurityService, SecureService) {
 
         var vm = this;
         vm.SecurityService = SecurityService;
@@ -21,11 +21,19 @@
 
         $http.get('/resource/').success(function (data) {
             vm.greeting = data;
-        })
+        });
 
+
+        vm.getSecuredResource = function () {
+            SecureService.getList().then(function (data) {
+                console.log(data);
+            }, function (error) {
+                console.log('error: ' + error);
+            });
+        }
 
     };
 
-    HomeController.$inject = ['$http', 'SecurityService'];
+    HomeController.$inject = ['$http', 'SecurityService', 'SecureService'];
     angular.module("myApp.controllers").controller("HomeController", HomeController);
 }(angular));
