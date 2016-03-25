@@ -13,12 +13,35 @@
 <body ng-app="myApp" ng-cloak class="ng-cloak">
 
 <div ng-controller="LoginController as vmLogin" class="container">
-    <ul class="nav nav-pills" role="tablist">
-        <li class="active"><a href="#/">home</a></li>
-        <li><a href="#/login">login</a></li>
-        <li ng-show="vmLogin.SecurityService.authenticated"><a href="" ng-click="vmLogin.logout()">logout</a></li>
-        <li> {{vmLogin.SecurityService.authenticated }}</li>
-    </ul>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#/">home</a></li>
+                    <li><a href="#/login">login</a></li>
+                    <li ng-show="vmLogin.SecurityService.authenticated">
+                        <a href="" ng-click="vmLogin.logout()">logout</a>
+                    </li>
+                </ul>
+                <ul ng-show="vmLogin.SecurityService.authenticated"  class="nav navbar-nav navbar-right">
+                    <li>Hello {{vmLogin.SecurityService.username }}</li>
+                    <li>Roles: {{vmLogin.SecurityService.roles }}</li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+
+
 </div>
 
 <div ng-view class="container"></div>

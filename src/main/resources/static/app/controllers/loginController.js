@@ -5,57 +5,47 @@
 
         vmLogin.SecurityService = SecurityService;
 
-
-        var authenticate = function(credentials, callback) {
-            var headers = credentials ? {
-                authorization : "Basic "
-                + btoa(credentials.username + ":"
-                    + credentials.password)
-            } : {};
-
-            $http.get('user', {
-                headers : headers
-            }).success(function(data) {
-                if (data.name) {
-                    SecurityService.authenticated = true;
-                } else {
-                    SecurityService.authenticated = false;
-                }
-                callback && callback(SecurityService.authenticated);
-            }).error(function(error) {
-                if(error.status == 401){
-                    vmLogin.error = "You are not authorized 401";
-                }else{
-                    vmLogin.error = "Something went wrong";
-                }
-                SecurityService.authenticated = false;
-                callback && callback(false);
-            });
-
-        };
-
         authenticate();
+
         vmLogin.credentials = {};
 
-        vmLogin.login = function () {
-            authenticate(vmLogin.credentials, function (authenticated) {
-                if (authenticated) {
+        function authenticate() {
+            SecurityService.authenticate(vmLogin.credentials).then(function (data) {
+                if (data.name) {
                     console.log("Login succeeded");
-                    $location.path("/");
-
+                    SecurityService.authenticated = true;
+                    SecurityService.username = data.name;
+                    SecurityService.roles = data.authorities;
+                    //$location.path("/");
                 } else {
-                    $location.path("/login");
                     console.log("Login failed");
+                    SecurityService.authenticated = false;
+                    console.log("User is not logged in");
                 }
+
+            }, function (error) {
+
+                vmLogin.error = "Login ot successfull";
+                console.log("User is not logged in");
             });
+        };
+
+        vmLogin.login = function () {
+            authenticate();
         };
 
 
         vmLogin.logout = function () {
-            $http.post('logout', {}).finally(function () {
+
+            SecurityService.logout().then(function () {
+                console.log('logout success');
+            }, function (error) {
+                console.log('error logout');
+            }).finally(function () {
                 SecurityService.authenticated = false;
                 $location.path("/");
             });
+
         };
 
 

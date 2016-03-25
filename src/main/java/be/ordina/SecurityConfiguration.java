@@ -1,34 +1,85 @@
 package be.ordina;
 
+import be.ordina.authentication.CsrfHeaderFilter;
+import be.ordina.authentication.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
- * Created by MaBa on 24/03/16.
+ * Let css, js and views/*.html passthrough in Spring Security
+ * <p>
+ * The server create a cookie: XSRF-TOKEN
+ * Angular will then append a X-XSRF-TOKEN in every header request
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true) // role checks on method level
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder
-                .inMemoryAuthentication()
-                .withUser("jimi").password("hendrix").roles("USER")
-                .and()
-                .withUser("admin").password("admin").roles("USER", "ADMIN");
+    private CustomUserDetailService customUserDetailService;
+
+
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+//        authenticationManagerBuilder
+//                .inMemoryAuthentication()
+//                .withUser("jimi").password("hendrix").roles("USER")
+//                .and()
+//                .withUser("admin").password("admin").roles("USER", "ADMIN");
+//    }
+
+
+    /**
+     * Configure your custom class to get username and the roles
+     * @param auth
+     * @throws Exception
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(customUserDetailService);
+    }
+
+    /**
+     * Configure Spring security
+     * @param http
+     * @throws Exception
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.httpBasic().and()
+                .authorizeRequests()
+                .antMatchers(
+                        "/app/views/**/*.html",
+                        "/app/**/*.js",
+                        "/bower_components/**",
+                        "/css/**",
+                        "/index.html",
+                        "/home.html",
+                        "/login.html",
+                        "/").permitAll().anyRequest()
+                .authenticated().and()
+                .csrf().csrfTokenRepository(csrfTokenRepository())
+                .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
     }
 
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-        http.csrf().disable();
+    /**
+     * Angular will send a header with: X-XSRF-TOKEN.
+     * <p>
+     * Here we configure what spring is expecting in every request
+     *
+     * @return
+     */
+    private CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setHeaderName("X-XSRF-TOKEN");
+        return repository;
     }
 }

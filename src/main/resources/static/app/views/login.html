@@ -12,7 +12,7 @@
         <input type="password" class="form-control" id="password" name="password"
                ng-model="vm.credentials.password"/>
     </div>
-    <button type="submit" class="btn btn-primary" >Submit</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="vm.SecurityService.authenticated">Submit</button>
 
 
     <pre>{{ vm.credentials | json }}</pre>
