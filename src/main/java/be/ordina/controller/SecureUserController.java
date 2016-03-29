@@ -9,19 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/secure")
-public class SecureController {
+@RequestMapping("/secureUser")
+public class SecureUserController {
 
 
     /**
-     * Will throw 403 for all not Admin users
+     * Will throw 403 for all not Admin or User users
+     *
      * @return
      */
     @RequestMapping(method = RequestMethod.GET)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public List<String> securedData() {
+    @PreAuthorize("hasAnyRole({'ROLE_ADMIN', 'ROLE_USER'})")
+    public List<String> securedDataAdminUser() {
         List<String> securedStrings = new ArrayList<>();
-        securedStrings.add("This is a secret message. Only for Admin Roles");
+        securedStrings.add("This is a secret message. Only for User and Admin Roles");
         return securedStrings;
     }
 
