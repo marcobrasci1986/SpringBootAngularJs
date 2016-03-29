@@ -31,6 +31,9 @@
                     <li ng-show="vmLogin.SecurityService.authenticated">
                         <a href="" ng-click="vmLogin.logout()">logout</a>
                     </li>
+                    <li ng-show="vmLogin.SecurityService.authenticated">
+                        <a href="" ng-click="vmLogin.customLogout()">Custom logout</a>
+                    </li>
                 </ul>
                 <ul ng-show="vmLogin.SecurityService.authenticated"  class="nav navbar-nav navbar-right">
                     <li>Hello {{vmLogin.SecurityService.username }}</li>

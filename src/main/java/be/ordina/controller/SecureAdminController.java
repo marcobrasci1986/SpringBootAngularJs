@@ -25,16 +25,4 @@ public class SecureAdminController {
         return securedStrings;
     }
 
-//    /**
-//     * Will throw 403 for all not Admin or User users
-//     * @return
-//     */
-//    @RequestMapping(method = RequestMethod.GET)
-//    @PreAuthorize("hasAuthority('ROLE_ADMIN', 'ROLE_USER')")
-//    public List<String> securedDataAdminUser() {
-//        List<String> securedStrings = new ArrayList<>();
-//        securedStrings.add("This is a secret message. Only for User and Admin Roles");
-//        return securedStrings;
-//    }
-
 }

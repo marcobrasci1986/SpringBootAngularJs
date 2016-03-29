@@ -1,6 +1,7 @@
 package be.ordina;
 
 import be.ordina.authentication.CsrfHeaderFilter;
+import be.ordina.authentication.CustomLogoutHandler;
 import be.ordina.authentication.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Let css, js and views/*.html passthrough in Spring Security
@@ -27,6 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    private CustomLogoutHandler customLogoutHandler;
 
 
 //    @Autowired
@@ -52,9 +57,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-
     /**
      * Configure Spring security
+     *
      * @param http
      * @throws Exception
      */
@@ -72,8 +77,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/login.html",
                         "/").permitAll().anyRequest()
                 .authenticated().and()
-                .csrf().csrfTokenRepository(csrfTokenRepository())
+                .logout().addLogoutHandler(customLogoutHandler).logoutRequestMatcher(new AntPathRequestMatcher("/customLogout"))
+                .and().csrf().csrfTokenRepository(csrfTokenRepository())
                 .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+
     }
 
 

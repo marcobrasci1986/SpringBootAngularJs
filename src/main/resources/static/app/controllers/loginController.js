@@ -48,6 +48,14 @@
 
         };
 
+        vmLogin.customLogout  = function () {
+            console.log('Custom logout');
+            SecurityService.customLogout();
+
+            SecurityService.authenticated = false;
+            $location.path("/");
+        }
+
 
     };
 
